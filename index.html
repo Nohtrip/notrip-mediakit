@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOTRIP — 미디어킷 & 제휴 제안서</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FAF8F4;--sand:#F0EBE1;--stone:#C8BFB0;--ink:#1A1714;--muted:#6B6358;
+  --accent:#2C5F4A;--accent-light:#E8F0EC;--gold:#B8963E;--gold-light:#F5EDD6;
+  --white:#FFFFFF;--border:#E2DDD6;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+.lang-btn-wrap{position:fixed;top:20px;right:24px;z-index:100;display:flex;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:24px;overflow:hidden;backdrop-filter:blur(8px)}
+.lang-btn{padding:7px 18px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,.8);transition:all .2s;letter-spacing:.02em}
+.lang-btn.active{background:rgba(255,255,255,.25);color:#fff}
+.lang-btn:hover:not(.active){background:rgba(255,255,255,.1)}
+
+.hero{
+  padding:56px 40px 48px;
+  background:linear-gradient(150deg,#2C5F4A 0%,#1a3d2e 100%);
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:32px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.hero-left{position:relative}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,56px);font-weight:600;color:#fff;line-height:1;letter-spacing:-.02em;margin-bottom:10px}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.65);font-weight:300;line-height:1.6;max-width:380px}
+.hero-divider{width:32px;height:2px;background:#B8963E;margin:16px 0}
+
+.hero-stats{display:flex;flex-direction:column;gap:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:16px;overflow:hidden;min-width:160px}
+.hero-stat{padding:16px 24px;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
+.hero-stat:last-child{border-bottom:none}
+.hero-stat-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:#fff;line-height:1}
+.hero-stat-label{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.06em;margin-top:4px}
+
+section{padding:60px 40px;max-width:900px;margin:0 auto}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#2C5F4A;margin-bottom:10px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,34px);font-weight:600;color:#1A1714;margin-bottom:32px;line-height:1.2}
+.section-title.ko{font-family:'Noto Serif KR',serif}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.about-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:22px 24px;position:relative;overflow:hidden}
+.about-card::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#2C5F4A}
+.about-card h3{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#2C5F4A;margin-bottom:8px}
+.about-card p{font-size:14px;color:var(--muted);line-height:1.6}
+.about-card a{color:#2C5F4A;text-decoration:none;font-weight:500;word-break:break-all}
+
+.stats-section{background:var(--sand);border-radius:20px;padding:40px;margin:0 16px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.stat-card{background:var(--white);border-radius:10px;padding:16px;text-align:center;border:1px solid var(--border)}
+.stat-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:#1A1714}
+.stat-month{font-size:10px;color:var(--muted);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase}
+.stat-label{font-size:11px;color:#2C5F4A;font-weight:500;margin-top:2px}
+.growth-badge{display:inline-flex;align-items:center;gap:6px;background:#E8F0EC;color:#2C5F4A;font-size:12px;font-weight:500;padding:7px 14px;border-radius:20px}
+
+.audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.bar-wrap{height:5px;background:var(--sand);border-radius:4px;flex:1;margin-left:12px}
+.bar-fill{height:100%;border-radius:4px;background:#2C5F4A}
+
+.posts-list{display:flex;flex-direction:column;gap:10px}
+.post-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;align-items:center;gap:14px}
+.post-num{font-size:12px;font-weight:500;color:var(--stone);min-width:18px}
+.post-text{font-size:13px;color:#1A1714;flex:1;line-height:1.5}
+.post-views{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:#2C5F4A;white-space:nowrap}
+.post-views span{font-size:11px;font-weight:400;color:var(--muted);font-family:'DM Sans',sans-serif;margin-left:2px}
+
+.content-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.content-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px 24px}
+.content-icon{font-size:22px;margin-bottom:10px}
+.content-card h3{font-size:14px;font-weight:500;color:#1A1714;margin-bottom:6px}
+.content-card p{font-size:12px;color:var(--muted);line-height:1.6}
+.content-tag{display:inline-block;background:#E8F0EC;color:#2C5F4A;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;margin:3px 2px 0 0}
+
+.contact-section{background:#2C5F4A;border-radius:20px;padding:48px 40px;text-align:center;margin:0 16px 64px}
+.contact-section h2{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;color:#fff;margin-bottom:10px}
+.contact-sub{font-size:15px;color:rgba(255,255,255,.7);margin-bottom:32px}
+.contact-methods{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.contact-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:12px 24px;border-radius:36px;font-size:14px;font-weight:500;text-decoration:none;transition:all .2s}
+.contact-pill:hover{background:rgba(255,255,255,.2)}
+
+footer{text-align:center;padding:28px;font-size:12px;color:var(--stone);border-top:1px solid var(--border)}
+
+[data-ko],[data-en]{transition:opacity .15s}
+
+@media(max-width:640px){
+  .hero{grid-template-columns:1fr;padding:48px 24px 40px}
+  .hero-stats{flex-direction:row;min-width:unset}
+  .hero-stat{flex:1;border-bottom:none;border-right:1px solid rgba(255,255,255,.1)}
+  .hero-stat:last-child{border-right:none}
+  .about-grid,.audience-grid,.content-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  section{padding:40px 20px}
+  .stats-section{margin:0;border-radius:0;padding:32px 20px}
+  .contact-section{margin:0 0 48px;border-radius:16px}
+  .lang-btn-wrap{top:12px;right:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="lang-btn-wrap">
+  <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
+  <button class="lang-btn" onclick="setLang('en')">English</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-badge" data-ko>미디어킷 · 제휴 제안서</div>
+    <div class="hero-badge" data-en style="display:none">Media Kit · Partnership Proposal</div>
+    <h1>NOTRIP</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub" data-ko>국내·해외 여행 숙소, 여행 프로그램을 소개하는<br>대한민국 여행 블로그</p>
+    <p class="hero-sub" data-en style="display:none">South Korea's travel blog covering domestic & international accommodations and travel programs</p>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">2,083</div>
+      <div class="hero-stat-label" data-ko>월간 방문자 (Apr)</div>
+      <div class="hero-stat-label" data-en style="display:none">Monthly Visitors (Apr)</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">×18</div>
+      <div class="hero-stat-label" data-ko>3개월 성장배수</div>
+      <div class="hero-stat-label" data-en style="display:none">3-Month Growth</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">70%</div>
+      <div class="hero-stat-label" data-ko>여성 독자 비율</div>
+      <div class="hero-stat-label" data-en style="display:none">Female Readership</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section>
+  <div class="section-label" data-ko>소개</div>
+  <div class="section-label" data-en style="display:none">About</div>
+  <h2 class="section-title ko" data-ko>노트립은 어떤 블로그인가요?</h2>
+  <h2 class="section-title" data-en style="display:none">What is NOTRIP?</h2>
+  <div class="about-grid">
+    <div class="about-card">
+      <h3 data-ko>네이버 블로그</h3><h3 data-en style="display:none">Naver Blog</h3>
+      <p><a href="https://blog.naver.com/notrip_wave" target="_blank">blog.naver.com/notrip_wave</a></p>
+    </div>
+    <div class="about-card">
+      <h3 data-ko>영문 블로그</h3><h3 data-en style="display:none">English Blog</h3>
+      <p><a href="https://nohstayguide.com" target="_blank">nohstayguide.com</a></p>
+    </div>
+    <div class="about-card">
+      <h3 data-ko>운영 기간</h3><h3 data-en style="display:none">Operation Period</h3>
+      <p data-ko>2025년 7월 시작 · 2026년 2월 본격 운영</p>
+      <p data-en style="display:none">Started Jul 2025 · Full operation from Feb 2026</p>
+    </div>
+    <div class="about-card">
+      <h3 data-ko>카테고리</h3><h3 data-en style="display:none">Categories</h3>
+      <p data-ko>국내·해외 여행 · 숙소 리뷰 · 여행 꿀팁</p>
+      <p data-en style="display:none">Domestic · International · Accommodation · Tips</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div style="max-width:900px;margin:0 auto">
+    <div class="section-label" data-ko>블로그 통계</div>
+    <div class="section-label" data-en style="display:none">Blog Statistics</div>
+    <h2 class="section-title ko" data-ko>빠르게 성장하는 여행 채널</h2>
+    <h2 class="section-title" data-en style="display:none">A Rapidly Growing Travel Channel</h2>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-month">2026.01</div><div class="stat-num">111</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div></div>
+      <div class="stat-card"><div class="stat-month">2026.02</div><div class="stat-num">221</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div></div>
+      <div class="stat-card"><div class="stat-month">2026.03</div><div class="stat-num">1,544</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div></div>
+      <div class="stat-card" style="border:2px solid #2C5F4A"><div class="stat-month">2026.04</div><div class="stat-num" style="color:#2C5F4A">2,083</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div></div>
+    </div>
+    <div style="text-align:center">
+      <span class="growth-badge">↑ <span data-ko>2월 대비 3월 약 7배 급성장</span><span data-en style="display:none">~7x growth Feb → Mar</span></span>
+    </div>
+    <div class="audience-grid">
+      <div class="about-card" style="border-left:none">
+        <h3 data-ko>성별 비율</h3><h3 data-en style="display:none">Gender Split</h3>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center">
+            <span style="font-size:12px;color:#6B6358;min-width:28px" data-ko>여성</span>
+            <span style="font-size:12px;color:#6B6358;min-width:28px" data-en style="display:none">F</span>
+            <div style="display:flex;align-items:center;gap:8px;flex:1">
+              <div class="bar-wrap"><div class="bar-fill" style="width:70%"></div></div>
+              <span style="font-size:12px;font-weight:500;min-width:30px">70%</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center">
+            <span style="font-size:12px;color:#6B6358;min-width:28px" data-ko>남성</span>
+            <span style="font-size:12px;color:#6B6358;min-width:28px" data-en style="display:none">M</span>
+            <div style="display:flex;align-items:center;gap:8px;flex:1">
+              <div class="bar-wrap"><div class="bar-fill" style="width:30%;background:#C8BFB0"></div></div>
+              <span style="font-size:12px;font-weight:500;min-width:30px">30%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-card" style="border-left:none">
+        <h3 data-ko>지역 · 연령</h3><h3 data-en style="display:none">Location · Age</h3>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">🇰🇷</span><span style="font-size:13px;color:#1A1714" data-ko>대한민국 (주요 독자)</span><span style="font-size:13px;color:#1A1714" data-en style="display:none">South Korea (Primary)</span></div>
+          <div style="font-size:12px;color:#6B6358" data-ko>20대 · 30대 · 40대 · 50대 고루 분포</div>
+          <div style="font-size:12px;color:#6B6358" data-en style="display:none">Evenly distributed across 20s–50s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BEST POSTS -->
+<section>
+  <div class="section-label" data-ko>인기 콘텐츠</div><div class="section-label" data-en style="display:none">Top Content</div>
+  <h2 class="section-title ko" data-ko>독자들이 가장 많이 찾는 포스팅</h2>
+  <h2 class="section-title" data-en style="display:none">Most-Read Posts</h2>
+  <div class="posts-list">
+    <div class="post-item"><div class="post-num">01</div><div class="post-text" data-ko>말레이시아 KL 트로피카나 더 레지던스 — 한달살기, 인피니티풀+트윈타워 뷰</div><div class="post-text" data-en style="display:none">Tropicana The Residence KL — Long-Stay, Infinity Pool + Twin Tower View</div><div class="post-views">530<span>views</span></div></div>
+    <div class="post-item"><div class="post-num">02</div><div class="post-text" data-ko>일본 여행 필수품 체크리스트</div><div class="post-text" data-en style="display:none">Japan Travel Essential Checklist</div><div class="post-views">416<span>views</span></div></div>
+    <div class="post-item"><div class="post-num">03</div><div class="post-text" data-ko>전주 목화 호텔 — 경성 감성 숙소 내돈내산 후기</div><div class="post-text" data-en style="display:none">Mokwa Hotel Jeonju — Honest Stay Review</div><div class="post-views">393<span>views</span></div></div>
+    <div class="post-item"><div class="post-num">04</div><div class="post-text" data-ko>오사카 USJ — 닌텐도 월드 익스프레스 꿀팁 총정리</div><div class="post-text" data-en style="display:none">USJ Osaka — Nintendo World Express Pass Guide</div><div class="post-views">393<span>views</span></div></div>
+    <div class="post-item"><div class="post-num">05</div><div class="post-text" data-ko>캐나다 로키 — 밴쿠버 출발 3박4일 밴프·레이크루이스 꿀팁</div><div class="post-text" data-en style="display:none">Canadian Rockies — 4-Day Banff & Lake Louise from Vancouver</div><div class="post-views">286<span>views</span></div></div>
+  </div>
+</section>
+
+<!-- CONTENT TYPES -->
+<section style="padding-top:0">
+  <div class="section-label" data-ko>콘텐츠 제공</div><div class="section-label" data-en style="display:none">Content Offerings</div>
+  <h2 class="section-title ko" data-ko>협찬 가능한 콘텐츠 유형</h2>
+  <h2 class="section-title" data-en style="display:none">Available Collaboration Types</h2>
+  <div class="content-grid">
+    <div class="content-card"><div class="content-icon">🏨</div><h3 data-ko>숙소 체험 리뷰</h3><h3 data-en style="display:none">Accommodation Review</h3><p data-ko>호텔·리조트·펜션·아파트먼트 직접 체험 후 상세 리뷰</p><p data-en style="display:none">Detailed review after direct stay at hotels, resorts & serviced apartments</p><div style="margin-top:10px"><span class="content-tag" data-ko>국내</span><span class="content-tag" data-en style="display:none">Domestic</span><span class="content-tag" data-ko>해외</span><span class="content-tag" data-en style="display:none">International</span><span class="content-tag">SEO</span></div></div>
+    <div class="content-card"><div class="content-icon">✈️</div><h3 data-ko>여행 프로그램 소개</h3><h3 data-en style="display:none">Travel Program Feature</h3><p data-ko>투어 패키지·액티비티·여행 상품 소개 및 예약 꿀팁</p><p data-en style="display:none">Tour packages, activities & booking tips</p><div style="margin-top:10px"><span class="content-tag" data-ko>체험단</span><span class="content-tag" data-en style="display:none">Experience</span><span class="content-tag" data-ko>협찬</span><span class="content-tag" data-en style="display:none">Sponsored</span></div></div>
+    <div class="content-card"><div class="content-icon">🔍</div><h3 data-ko>네이버 SEO 최적화</h3><h3 data-en style="display:none">Naver SEO</h3><p data-ko>대한민국 네이버 SEO 최적화로 장기적 노출 효과</p><p data-en style="display:none">Naver SEO-optimized for sustained long-term visibility in Korea</p><div style="margin-top:10px"><span class="content-tag">Naver SEO</span><span class="content-tag" data-ko>장기 노출</span><span class="content-tag" data-en style="display:none">Long-term</span></div></div>
+    <div class="content-card"><div class="content-icon">🌐</div><h3 data-ko>영문 구글 블로그</h3><h3 data-en style="display:none">English Google Blog</h3><p data-ko>nohstayguide.com을 통한 글로벌 독자 대상 영문 콘텐츠</p><p data-en style="display:none">English content reaching global audiences via nohstayguide.com</p><div style="margin-top:10px"><span class="content-tag">Google SEO</span><span class="content-tag" data-ko>글로벌</span><span class="content-tag" data-en style="display:none">Global</span></div></div>
+  </div>
+</section>
+
+<!-- BRAND POINT -->
+<section style="padding-top:0">
+  <div class="section-label" data-ko>차별점</div><div class="section-label" data-en style="display:none">Brand Point</div>
+  <h2 class="section-title ko" data-ko>노트립만의 강점</h2>
+  <h2 class="section-title" data-en style="display:none">Why Partner with NOTRIP?</h2>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="background:#F5EDD6;border:1px solid #E8D5A0;border-radius:14px;padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+      <div style="font-size:24px;min-width:32px">📈</div>
+      <div><div style="font-size:13px;font-weight:500;color:#1A1714;margin-bottom:4px" data-ko>폭발적 성장세</div><div style="font-size:13px;font-weight:500;color:#1A1714;margin-bottom:4px" data-en style="display:none">Explosive Growth</div><div style="font-size:12px;color:#6B6358" data-ko>본격 운영 2개월 만에 방문자 약 9배 증가. 지금이 가장 합리적인 협찬 시점입니다.</div><div style="font-size:12px;color:#6B6358" data-en style="display:none">~9x visitor growth in 2 months. Now is the optimal time to partner.</div></div>
+    </div>
+    <div style="background:#E8F0EC;border:1px solid #B8D4C4;border-radius:14px;padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+      <div style="font-size:24px;min-width:32px">🌏</div>
+      <div><div style="font-size:13px;font-weight:500;color:#1A1714;margin-bottom:4px" data-ko>한·영 이중 채널 운영</div><div style="font-size:13px;font-weight:500;color:#1A1714;margin-bottom:4px" data-en style="display:none">Dual Channel — KR & EN</div><div style="font-size:12px;color:#6B6358" data-ko>네이버(국내) + 구글(글로벌) 동시 운영으로 국내외 독자를 모두 커버합니다.</div><div style="font-size:12px;color:#6B6358" data-en style="display:none">Naver (Korea) + Google (Global) — covering both domestic and international audiences.</div></div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2DDD6;border-radius:14px;padding:20px 24px;display:flex;gap:16px;align-items:flex-start">
+      <div style="font-size:24px;min-width:32px">🎯</div>
+      <div><div style="font-size:13px;font-weight:500;color:#1A1714;margin-bottom:4px" data-ko>구매력 높은 여행 핵심층</div><div style="font-size:13px;font-weight:500;color:#1A1714;margin-bottom:4px" data-en style="display:none">High-Intent Travel Audience</div><div style="font-size:12px;color:#6B6358" data-ko>여성 70%, 20~50대 폭넓은 연령대 — 숙소 예약에 직접 영향을 주는 실질적 여행 소비층.</div><div style="font-size:12px;color:#6B6358" data-en style="display:none">70% female, 20s–50s — active travel consumers who directly influence booking decisions.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <div class="section-label" style="color:rgba(255,255,255,.6)" data-ko>제휴 문의</div>
+  <div class="section-label" style="color:rgba(255,255,255,.6)" data-en style="display:none">Contact</div>
+  <h2 data-ko>협찬 제안은 이렇게 해주세요</h2>
+  <h2 data-en style="display:none">Let's Work Together</h2>
+  <p class="contact-sub" data-ko>숙소 체험, 여행 프로그램 협찬 등 다양한 제안을 환영합니다</p>
+  <p class="contact-sub" data-en style="display:none">We welcome proposals for accommodation stays, travel programs, and more</p>
+  <div class="contact-methods">
+    <a class="contact-pill" href="mailto:andeasyyy@naver.com">✉️ andeasyyy@naver.com</a>
+    <a class="contact-pill" href="https://blog.naver.com/notrip_wave" target="_blank">📝 Naver Blog</a>
+    <a class="contact-pill" href="https://nohstayguide.com" target="_blank">🌐 nohstayguide.com</a>
+  </div>
+</div>
+
+<footer>© 2026 NOTRIP · <span data-ko>노트립</span><span data-en style="display:none">All rights reserved</span></footer>
+
+<script>
+function setLang(lang){
+  document.querySelectorAll('[data-ko]').forEach(el=>el.style.display=lang==='ko'?'':'none');
+  document.querySelectorAll('[data-en]').forEach(el=>el.style.display=lang==='en'?'':'none');
+  document.querySelectorAll('.lang-btn').forEach(btn=>btn.classList.toggle('active',btn.textContent.trim()===(lang==='ko'?'한국어':'English')));
+}
+setLang('ko');
+</script>
+</body>
+</html>
