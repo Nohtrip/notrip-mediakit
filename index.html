@@ -28,16 +28,17 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--yellow);color:var(--
 .lang-btn:hover:not(.active){background:rgba(255,255,255,.95);color:var(--ink);transform:scale(1.05)}
 
 /* HERO */
-.hero{min-height:88vh;display:grid;grid-template-columns:1fr 400px;align-items:center;gap:0;padding:80px 64px 40px;background:var(--yellow);position:relative;overflow:hidden}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 64px 40px;background:var(--yellow);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;bottom:-60px;left:-60px;width:320px;height:320px;border-radius:50%;background:rgba(200,81,26,.06)}
-.hero-left{position:relative;z-index:2}
+.hero-left{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
 .hero-tag{display:inline-block;background:var(--orange);color:#fff;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:24px;font-family:'DM Sans',sans-serif}
 .hero h1{font-family:'DM Sans',sans-serif;font-size:clamp(52px,7vw,88px);font-weight:500;color:var(--orange);line-height:.95;letter-spacing:-.03em;margin-bottom:16px}
 .hero-tagline{font-size:15px;color:var(--orange);font-weight:400;margin-bottom:12px}
-.hero-sub{font-size:14px;color:var(--muted);font-weight:300;line-height:1.7;max-width:400px;margin-bottom:40px}
+.hero-sub{font-size:14px;color:var(--muted);font-weight:300;line-height:1.7;max-width:480px;margin-bottom:40px;text-align:center}
 .hero-divider{width:40px;height:3px;background:var(--orange);margin-bottom:32px;border-radius:2px}
-.hero-stats{display:flex;gap:0;background:rgba(255,255,255,.7);border:1.5px solid var(--border);border-radius:20px;overflow:hidden}
-.hero-stat{padding:20px 28px;text-align:center;border-right:1px solid var(--border);cursor:default;transition:all .25s cubic-bezier(.34,1.56,.64,1);position:relative}
+.hero-right{display:none}
+.hero-stats{display:inline-flex;gap:0;background:rgba(255,255,255,.7);border:1.5px solid var(--border);border-radius:20px;overflow:hidden}
+.hero-stat{padding:24px 52px;text-align:center;border-right:1px solid var(--border);cursor:default;transition:all .25s cubic-bezier(.34,1.56,.64,1);min-width:180px}
 .hero-stat:last-child{border-right:none}
 .hero-stat:hover{background:rgba(255,255,255,.95);transform:scale(1.06);z-index:1;box-shadow:0 8px 24px rgba(200,81,26,.15);border-radius:16px}
 .hero-stat:hover .hero-stat-num{color:var(--orange)}
@@ -164,7 +165,7 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
     <div class="hero-tag" data-ko>미디어킷 · 제휴 제안서</div>
     <div class="hero-tag" data-en style="display:none">Media Kit · Partnership Proposal</div>
     <div class="hero-tag" data-vi style="display:none">Hồ Sơ Truyền Thông · Đề Xuất Hợp Tác</div>
-    <h1>NOTRIP</h1>
+    <h1>NOHTRIP</h1>
     <p class="hero-tagline" data-ko>나만의 여행·숙소·맛집 Share</p>
     <p class="hero-tagline" data-en style="display:none">My Travel · Stay · Food Share</p>
     <p class="hero-tagline" data-vi style="display:none">Chia Sẻ Du Lịch · Lưu Trú · Ẩm Thực</p>
