@@ -14,10 +14,10 @@
 }
 body{font-family:'Noto Sans KR',sans-serif;background:var(--yellow);color:var(--ink);overflow-x:hidden}
 
-.lang-btn-wrap{position:fixed;top:20px;right:24px;z-index:100;display:flex;background:rgba(255,255,255,.6);border:1.5px solid rgba(200,81,26,.25);border-radius:24px;overflow:hidden;backdrop-filter:blur(8px)}
-.lang-btn{padding:7px 18px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--orange);transition:all .2s;font-family:'Noto Sans KR',sans-serif}
-.lang-btn.active{background:var(--orange);color:#fff}
-.lang-btn:hover:not(.active){background:var(--orange-pale)}
+.lang-btn-wrap{position:fixed;top:20px;right:24px;z-index:100;display:flex;gap:6px;backdrop-filter:blur(8px)}
+.lang-btn{width:44px;height:44px;cursor:pointer;border:2.5px solid transparent;background:rgba(255,255,255,.7);border-radius:50%;transition:all .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.12);font-size:12px;font-weight:700;color:var(--muted);font-family:'DM Sans',sans-serif;letter-spacing:.02em}
+.lang-btn.active{border-color:var(--orange);color:var(--orange);box-shadow:0 2px 12px rgba(200,81,26,.3);transform:scale(1.1)}
+.lang-btn:hover:not(.active){background:rgba(255,255,255,.95);color:var(--ink);transform:scale(1.05)}
 
 /* HERO */
 .hero{min-height:88vh;display:grid;grid-template-columns:1fr 400px;align-items:center;gap:0;padding:80px 64px 40px;background:var(--yellow);position:relative;overflow:hidden}
@@ -29,10 +29,12 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--yellow);color:var(--
 .hero-sub{font-size:14px;color:var(--muted);font-weight:300;line-height:1.7;max-width:400px;margin-bottom:40px}
 .hero-divider{width:40px;height:3px;background:var(--orange);margin-bottom:32px;border-radius:2px}
 .hero-stats{display:flex;gap:0;background:rgba(255,255,255,.7);border:1.5px solid var(--border);border-radius:20px;overflow:hidden}
-.hero-stat{padding:20px 28px;text-align:center;border-right:1px solid var(--border)}
+.hero-stat{padding:20px 28px;text-align:center;border-right:1px solid var(--border);cursor:default;transition:all .25s cubic-bezier(.34,1.56,.64,1);position:relative}
 .hero-stat:last-child{border-right:none}
-.hero-stat-num{font-family:'DM Sans',sans-serif;font-size:28px;font-weight:500;color:var(--orange);line-height:1}
-.hero-stat-label{font-size:11px;color:var(--muted);margin-top:5px;letter-spacing:.04em}
+.hero-stat:hover{background:rgba(255,255,255,.95);transform:scale(1.06);z-index:1;box-shadow:0 8px 24px rgba(200,81,26,.15);border-radius:16px}
+.hero-stat:hover .hero-stat-num{color:var(--orange)}
+.hero-stat-num{font-family:'DM Sans',sans-serif;font-size:28px;font-weight:500;color:var(--orange);line-height:1;transition:all .25s}
+.hero-stat-label{font-size:11px;color:var(--muted);margin-top:5px;letter-spacing:.04em;transition:all .25s}
 .hero-right{position:relative;z-index:2;display:flex;justify-content:center;align-items:flex-end}
 .hero-char{width:100%;max-width:340px;filter:drop-shadow(0 20px 40px rgba(200,81,26,.15))}
 
@@ -52,7 +54,9 @@ section{padding:64px 64px;max-width:1100px;margin:0 auto}
 /* STATS inner yellow box */
 .stats-inner{background:var(--yellow);border-radius:20px;padding:40px;margin:0 64px}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
-.stat-card{background:var(--white);border-radius:14px;padding:18px;text-align:center;border:1.5px solid var(--border)}
+.stat-card{background:var(--white);border-radius:14px;padding:18px;text-align:center;border:1.5px solid var(--border);cursor:default;transition:all .25s cubic-bezier(.34,1.56,.64,1)}
+.stat-card:hover{transform:scale(1.05);box-shadow:0 8px 24px rgba(200,81,26,.15);border-color:var(--orange);background:var(--white)}
+.stat-card:hover .stat-num{color:var(--orange)}
 .stat-num{font-family:'DM Sans',sans-serif;font-size:26px;font-weight:500;color:var(--ink)}
 .stat-month{font-size:10px;color:var(--muted);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase;font-family:'DM Sans',sans-serif}
 .stat-label{font-size:11px;color:var(--orange);font-weight:500;margin-top:3px}
@@ -141,8 +145,9 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
 <body>
 
 <div class="lang-btn-wrap">
-  <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
-  <button class="lang-btn" onclick="setLang('en')">English</button>
+  <button class="lang-btn active" onclick="setLang('ko')" title="한국어">KR</button>
+  <button class="lang-btn" onclick="setLang('en')" title="English">EN</button>
+  <button class="lang-btn" onclick="setLang('vi')" title="Tiếng Việt">VN</button>
 </div>
 
 <!-- HERO -->
@@ -150,27 +155,33 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
   <div class="hero-left">
     <div class="hero-tag" data-ko>미디어킷 · 제휴 제안서</div>
     <div class="hero-tag" data-en style="display:none">Media Kit · Partnership Proposal</div>
+    <div class="hero-tag" data-vi style="display:none">Hồ Sơ Truyền Thông · Đề Xuất Hợp Tác</div>
     <h1>NOTRIP</h1>
     <p class="hero-tagline" data-ko>나만의 여행·숙소·맛집 Share</p>
     <p class="hero-tagline" data-en style="display:none">My Travel · Stay · Food Share</p>
+    <p class="hero-tagline" data-vi style="display:none">Chia Sẻ Du Lịch · Lưu Trú · Ẩm Thực</p>
     <div class="hero-divider"></div>
     <p class="hero-sub" data-ko>국내·해외 여행 숙소, 여행 프로그램을 소개하는 대한민국 여행 블로그입니다</p>
     <p class="hero-sub" data-en style="display:none">South Korea's travel blog covering domestic & international accommodations and travel programs</p>
+    <p class="hero-sub" data-vi style="display:none">Blog du lịch Hàn Quốc giới thiệu chỗ ở và chương trình du lịch trong và ngoài nước</p>
     <div class="hero-stats">
       <div class="hero-stat">
         <div class="hero-stat-num">2,083</div>
         <div class="hero-stat-label" data-ko>월간 방문자 (Apr)</div>
-        <div class="hero-stat-label" data-en style="display:none">Monthly Visitors</div>
+        <div class="hero-stat-label" data-en style="display:none">Monthly Visitors (Apr)</div>
+        <div class="hero-stat-label" data-vi style="display:none">Lượt truy cập/tháng (Tháng 4)</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">×18</div>
         <div class="hero-stat-label" data-ko>3개월 성장배수</div>
         <div class="hero-stat-label" data-en style="display:none">3-Month Growth</div>
+        <div class="hero-stat-label" data-vi style="display:none">Tăng trưởng 3 tháng</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">70%</div>
         <div class="hero-stat-label" data-ko>여성 독자 비율</div>
         <div class="hero-stat-label" data-en style="display:none">Female Readers</div>
+        <div class="hero-stat-label" data-vi style="display:none">Độc giả nữ</div>
       </div>
     </div>
   </div>
@@ -184,45 +195,49 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
 
 <!-- ABOUT -->
 <section>
-  <div class="section-label" data-ko>소개</div><div class="section-label" data-en style="display:none">About</div>
+  <div class="section-label" data-ko>소개</div><div class="section-label" data-en style="display:none">About</div><div class="section-label" data-vi style="display:none">Giới Thiệu</div>
   <h2 class="section-title" data-ko>노트립은 어떤 블로그인가요?</h2>
   <h2 class="section-title" data-en style="display:none">What is NOTRIP?</h2>
+  <h2 class="section-title" data-vi style="display:none">NOTRIP là blog gì?</h2>
   <div class="about-grid">
-    <div class="about-card"><h3 data-ko>네이버 블로그</h3><h3 data-en style="display:none">Naver Blog</h3><p><a href="https://blog.naver.com/notrip_wave" target="_blank">blog.naver.com/notrip_wave</a></p></div>
-    <div class="about-card"><h3 data-ko>영문 블로그</h3><h3 data-en style="display:none">English Blog</h3><p><a href="https://nohstayguide.com" target="_blank">nohstayguide.com</a></p></div>
-    <div class="about-card"><h3 data-ko>운영 기간</h3><h3 data-en style="display:none">Operation Period</h3><p data-ko>2025년 7월 시작 · 2026년 2월 본격 운영</p><p data-en style="display:none">Started Jul 2025 · Full operation from Feb 2026</p></div>
-    <div class="about-card"><h3 data-ko>카테고리</h3><h3 data-en style="display:none">Categories</h3><p data-ko>국내·해외 여행 · 숙소 리뷰 · 여행 꿀팁</p><p data-en style="display:none">Domestic · International · Accommodation · Tips</p></div>
+    <div class="about-card"><h3 data-ko>네이버 블로그</h3><h3 data-en style="display:none">Naver Blog</h3><h3 data-vi style="display:none">Blog Naver</h3><p><a href="https://blog.naver.com/notrip_wave" target="_blank">blog.naver.com/notrip_wave</a></p></div>
+    <div class="about-card"><h3 data-ko>영문 블로그</h3><h3 data-en style="display:none">English Blog</h3><h3 data-vi style="display:none">Blog Tiếng Anh</h3><p><a href="https://nohstayguide.com" target="_blank">nohstayguide.com</a></p></div>
+    <div class="about-card"><h3 data-ko>운영 기간</h3><h3 data-en style="display:none">Operation Period</h3><h3 data-vi style="display:none">Thời Gian Hoạt Động</h3><p data-ko>2025년 7월 시작 · 2026년 2월 본격 운영</p><p data-en style="display:none">Started Jul 2025 · Full operation from Feb 2026</p><p data-vi style="display:none">Bắt đầu T7/2025 · Hoạt động đầy đủ từ T2/2026</p></div>
+    <div class="about-card"><h3 data-ko>카테고리</h3><h3 data-en style="display:none">Categories</h3><h3 data-vi style="display:none">Danh Mục</h3><p data-ko>국내·해외 여행 · 숙소 리뷰 · 여행 꿀팁</p><p data-en style="display:none">Domestic · International · Accommodation · Tips</p><p data-vi style="display:none">Du lịch nội địa · Quốc tế · Đánh giá chỗ ở · Mẹo du lịch</p></div>
   </div>
 </section>
 
 <!-- STATS -->
 <div style="padding-bottom:64px">
   <div style="max-width:1100px;margin:0 auto;padding:0 64px">
-    <div class="section-label" data-ko>블로그 통계</div><div class="section-label" data-en style="display:none">Blog Statistics</div>
+    <div class="section-label" data-ko>블로그 통계</div><div class="section-label" data-en style="display:none">Blog Statistics</div><div class="section-label" data-vi style="display:none">Thống Kê Blog</div>
     <h2 class="section-title" data-ko>빠르게 성장하는 여행 채널</h2>
     <h2 class="section-title" data-en style="display:none">A Rapidly Growing Travel Channel</h2>
+    <h2 class="section-title" data-vi style="display:none">Kênh Du Lịch Đang Tăng Trưởng Nhanh</h2>
   </div>
   <div class="stats-inner">
     <!-- MAU -->
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-month">2026.01</div><div class="stat-num">111</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div></div>
-      <div class="stat-card"><div class="stat-month">2026.02</div><div class="stat-num">221</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div></div>
-      <div class="stat-card"><div class="stat-month">2026.03</div><div class="stat-num">1,544</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div></div>
-      <div class="stat-card" style="border-color:var(--orange);border-width:2px"><div class="stat-month">2026.04</div><div class="stat-num" style="color:var(--orange)">2,083</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div></div>
+      <div class="stat-card"><div class="stat-month">2026.01</div><div class="stat-num">111</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div><div class="stat-label" data-vi style="display:none">Lượt xem</div></div>
+      <div class="stat-card"><div class="stat-month">2026.02</div><div class="stat-num">221</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div><div class="stat-label" data-vi style="display:none">Lượt xem</div></div>
+      <div class="stat-card"><div class="stat-month">2026.03</div><div class="stat-num">1,544</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div><div class="stat-label" data-vi style="display:none">Lượt xem</div></div>
+      <div class="stat-card"><div class="stat-month">2026.04</div><div class="stat-num">2,083</div><div class="stat-label" data-ko>방문자</div><div class="stat-label" data-en style="display:none">Visitors</div><div class="stat-label" data-vi style="display:none">Lượt xem</div></div>
     </div>
     <div style="text-align:center;margin-bottom:20px">
-      <span class="growth-badge">↑ <span data-ko>2월 대비 3월 약 7배 급성장 · 지속 상승 중</span><span data-en style="display:none">~7x growth Feb→Mar · Continuously rising</span></span>
+      <span class="growth-badge">↑ <span data-ko>2월 대비 3월 약 7배 급성장 · 지속 상승 중</span><span data-en style="display:none">~7x growth Feb→Mar · Continuously rising</span><span data-vi style="display:none">Tăng ~7 lần từ T2→T3 · Đang tiếp tục tăng</span></span>
     </div>
 
     <!-- 연령 성별 분포 -->
     <div class="chart-card">
       <div class="chart-title" data-ko>연령·성별 독자 분포</div>
       <div class="chart-title" data-en style="display:none">Audience Age & Gender Distribution</div>
+      <div class="chart-title" data-vi style="display:none">Phân Bổ Độc Giả Theo Độ Tuổi & Giới Tính</div>
       <div class="chart-sub" data-ko>네이버 블로그 기준 · 2026.04</div>
       <div class="chart-sub" data-en style="display:none">Based on Naver Blog · April 2026</div>
+      <div class="chart-sub" data-vi style="display:none">Dựa trên Naver Blog · Tháng 4/2026</div>
       <div class="chart-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#7B9FD4"></div><span data-ko>남성</span><span data-en style="display:none">Male</span></div>
-        <div class="legend-item"><div class="legend-dot" style="background:#D4706A"></div><span data-ko>여성</span><span data-en style="display:none">Female</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7B9FD4"></div><span data-ko>남성</span><span data-en style="display:none">Male</span><span data-vi style="display:none">Nam</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#D4706A"></div><span data-ko>여성</span><span data-en style="display:none">Female</span><span data-vi style="display:none">Nữ</span></div>
       </div>
       <div style="display:flex;align-items:flex-end;gap:24px;height:160px;padding-bottom:24px">
         <!-- 10~20대 -->
@@ -233,6 +248,7 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
           </div>
           <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:500" data-ko>10~20대</div>
           <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:500" data-en style="display:none">10s–20s</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:500" data-vi style="display:none">10–20 tuổi</div>
         </div>
         <!-- 30~40대 -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center">
@@ -242,6 +258,7 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
           </div>
           <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:500" data-ko>30~40대</div>
           <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:500" data-en style="display:none">30s–40s</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:500" data-vi style="display:none">30–40 tuổi</div>
         </div>
         <!-- 50~60대 -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center">
@@ -251,6 +268,7 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
           </div>
           <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:500" data-ko>50~60대</div>
           <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:500" data-en style="display:none">50s–60s</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:500" data-vi style="display:none">50–60 tuổi</div>
         </div>
       </div>
 
@@ -258,27 +276,34 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
     <div class="chart-card" style="margin-top:16px">
       <div class="chart-title" data-ko>평균 블로그 체류 시간 비교</div>
       <div class="chart-title" data-en style="display:none">Average Dwell Time Comparison</div>
+      <div class="chart-title" data-vi style="display:none">So Sánh Thời Gian Ở Lại Trung Bình</div>
       <div class="chart-sub" data-ko>2026년 4월 기준 · 네이버 블로그 평균 대비</div>
       <div class="chart-sub" data-en style="display:none">April 2026 · vs Naver Blog average</div>
+      <div class="chart-sub" data-vi style="display:none">Tháng 4/2026 · So với trung bình blog Naver</div>
       <div class="dwell-row">
         <div class="dwell-card">
           <div class="dwell-label" data-ko>NOTRIP 체류 시간</div>
           <div class="dwell-label" data-en style="display:none">NOTRIP Dwell Time</div>
+          <div class="dwell-label" data-vi style="display:none">Thời gian ở lại NOTRIP</div>
           <div class="dwell-num" style="color:var(--orange)">2m 26s</div>
           <div class="dwell-badge" style="background:var(--orange-pale);color:var(--orange)" data-ko>내 블로그</div>
           <div class="dwell-badge" style="background:var(--orange-pale);color:var(--orange)" data-en style="display:none">My Blog</div>
+          <div class="dwell-badge" style="background:var(--orange-pale);color:var(--orange)" data-vi style="display:none">Blog của tôi</div>
         </div>
         <div class="dwell-card">
           <div class="dwell-label" data-ko>네이버 블로그 평균</div>
           <div class="dwell-label" data-en style="display:none">Naver Blog Average</div>
+          <div class="dwell-label" data-vi style="display:none">Trung bình blog Naver</div>
           <div class="dwell-num" style="color:var(--muted)">~1m 00s</div>
           <div class="dwell-badge" style="background:#F0EDE6;color:var(--muted)" data-ko>업계 평균</div>
           <div class="dwell-badge" style="background:#F0EDE6;color:var(--muted)" data-en style="display:none">Industry Avg</div>
+          <div class="dwell-badge" style="background:#F0EDE6;color:var(--muted)" data-vi style="display:none">Trung bình ngành</div>
         </div>
       </div>
       <div style="margin-top:16px;background:var(--orange-pale);border-radius:12px;padding:14px 18px;font-size:12px;color:var(--orange);text-align:center">
         <span data-ko>⏱ 업계 평균 대비 약 <strong>2.4배</strong> 긴 체류 시간 — 콘텐츠 신뢰도와 구매 전환율에 직결됩니다</span>
         <span data-en style="display:none">⏱ <strong>2.4×</strong> longer than industry average — directly linked to content trust & conversion</span>
+        <span data-vi style="display:none">⏱ Dài hơn <strong>2.4 lần</strong> so với trung bình ngành — phản ánh độ tin cậy nội dung và tỷ lệ chuyển đổi cao</span>
       </div>
     </div>
 
@@ -286,44 +311,50 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
     <div class="chart-card" style="margin-top:16px">
       <div class="chart-title" data-ko>주단위 제휴 링크 판매 현황</div>
       <div class="chart-title" data-en style="display:none">Weekly Affiliate Link Sales</div>
+      <div class="chart-title" data-vi style="display:none">Doanh Thu Liên Kết Hàng Tuần</div>
       <div class="chart-sub" data-ko>판매금액 기준 · 17~20주차</div>
       <div class="chart-sub" data-en style="display:none">By sales amount · Weeks 17–20</div>
+      <div class="chart-sub" data-vi style="display:none">Theo doanh thu · Tuần 17–20</div>
       <div style="display:flex;align-items:flex-end;gap:20px;height:180px;padding-bottom:32px;margin-top:8px">
         <!-- 17주 -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center">
-          <div style="font-size:11px;color:var(--orange);font-weight:500;margin-bottom:4px"><span data-ko>70만원</span><span data-en style="display:none">₩700K</span></div>
+          <div style="font-size:11px;color:var(--orange);font-weight:500;margin-bottom:4px"><span data-ko>70만원</span><span data-en style="display:none">₩700K</span><span data-vi style="display:none">₩700K</span></div>
           <div style="width:100%;border-radius:6px 6px 0 0;background:#7B9FD4;height:50px"></div>
           <div style="font-size:11px;color:var(--muted);margin-top:6px" data-ko>17주</div>
           <div style="font-size:11px;color:var(--muted);margin-top:6px" data-en style="display:none">Wk17</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px" data-vi style="display:none">Tuần 17</div>
         </div>
         <!-- 18주 -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center">
-          <div style="font-size:11px;color:var(--orange);font-weight:500;margin-bottom:4px"><span data-ko>5만원</span><span data-en style="display:none">₩50K</span></div>
+          <div style="font-size:11px;color:var(--orange);font-weight:500;margin-bottom:4px"><span data-ko>5만원</span><span data-en style="display:none">₩50K</span><span data-vi style="display:none">₩50K</span></div>
           <div style="width:100%;border-radius:6px 6px 0 0;background:#7B9FD4;height:4px"></div>
           <div style="font-size:11px;color:var(--muted);margin-top:6px" data-ko>18주</div>
           <div style="font-size:11px;color:var(--muted);margin-top:6px" data-en style="display:none">Wk18</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px" data-vi style="display:none">Tuần 18</div>
         </div>
         <!-- 19주 : 취소+판매 스택 -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center">
-          <div style="font-size:11px;color:var(--orange);font-weight:500;margin-bottom:4px"><span data-ko>155만원</span><span data-en style="display:none">₩1.55M</span></div>
+          <div style="font-size:11px;color:var(--orange);font-weight:500;margin-bottom:4px"><span data-ko>155만원</span><span data-en style="display:none">₩1.55M</span><span data-vi style="display:none">₩1.55M</span></div>
           <div style="width:100%;display:flex;flex-direction:column;border-radius:6px 6px 0 0;overflow:hidden">
             <div style="width:100%;background:#D4706A;height:28px"></div>
             <div style="width:100%;background:#7B9FD4;height:82px"></div>
           </div>
           <div style="font-size:11px;color:var(--muted);margin-top:6px" data-ko>19주</div>
           <div style="font-size:11px;color:var(--muted);margin-top:6px" data-en style="display:none">Wk19</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px" data-vi style="display:none">Tuần 19</div>
         </div>
         <!-- 20주 -->
         <div style="flex:1;display:flex;flex-direction:column;align-items:center">
-          <div style="font-size:11px;color:var(--orange);font-weight:500;margin-bottom:4px"><span data-ko>280만원</span><span data-en style="display:none">₩2.8M</span></div>
+          <div style="font-size:11px;color:var(--orange);font-weight:500;margin-bottom:4px"><span data-ko>280만원</span><span data-en style="display:none">₩2.8M</span><span data-vi style="display:none">₩2.8M</span></div>
           <div style="width:100%;border-radius:6px 6px 0 0;background:#7B9FD4;height:140px"></div>
           <div style="font-size:11px;color:var(--muted);margin-top:6px" data-ko>20주</div>
           <div style="font-size:11px;color:var(--muted);margin-top:6px" data-en style="display:none">Wk20</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px" data-vi style="display:none">Tuần 20</div>
         </div>
       </div>
       <div style="display:flex;gap:16px;margin-top:4px">
-        <div class="legend-item"><div class="legend-dot" style="background:#7B9FD4"></div><span data-ko>판매금액</span><span data-en style="display:none">Sales</span></div>
-        <div class="legend-item"><div class="legend-dot" style="background:#D4706A"></div><span data-ko>취소금액</span><span data-en style="display:none">Cancelled</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7B9FD4"></div><span data-ko>판매금액</span><span data-en style="display:none">Sales</span><span data-vi style="display:none">Doanh thu</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#D4706A"></div><span data-ko>취소금액</span><span data-en style="display:none">Cancelled</span><span data-vi style="display:none">Hoàn tiền</span></div>
       </div>
     </div>
 
@@ -332,40 +363,43 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
 
 <!-- POSTS -->
 <section style="padding-top:0">
-  <div class="section-label" data-ko>인기 콘텐츠</div><div class="section-label" data-en style="display:none">Top Content</div>
+  <div class="section-label" data-ko>인기 콘텐츠</div><div class="section-label" data-en style="display:none">Top Content</div><div class="section-label" data-vi style="display:none">Nội Dung Nổi Bật</div>
   <h2 class="section-title" data-ko>독자들이 가장 많이 찾는 포스팅</h2>
   <h2 class="section-title" data-en style="display:none">Most-Read Posts</h2>
+  <h2 class="section-title" data-vi style="display:none">Bài Viết Được Đọc Nhiều Nhất</h2>
   <div class="posts-list">
-    <div class="post-item"><div class="post-num">01</div><div class="post-text" data-ko>말레이시아 KL 트로피카나 더 레지던스 — 한달살기, 인피니티풀+트윈타워 뷰</div><div class="post-text" data-en style="display:none">Tropicana The Residence KL — Long-Stay, Infinity Pool + Twin Tower View</div><div class="post-views">530<span>views</span></div></div>
-    <div class="post-item"><div class="post-num">02</div><div class="post-text" data-ko>일본 여행 필수품 체크리스트</div><div class="post-text" data-en style="display:none">Japan Travel Essential Checklist</div><div class="post-views">416<span>views</span></div></div>
-    <div class="post-item"><div class="post-num">03</div><div class="post-text" data-ko>전주 목화 호텔 — 경성 감성 숙소 내돈내산 후기</div><div class="post-text" data-en style="display:none">Mokwa Hotel Jeonju — Honest Stay Review</div><div class="post-views">393<span>views</span></div></div>
-    <div class="post-item"><div class="post-num">04</div><div class="post-text" data-ko>오사카 USJ — 닌텐도 월드 익스프레스 꿀팁 총정리</div><div class="post-text" data-en style="display:none">USJ Osaka — Nintendo World Express Pass Guide</div><div class="post-views">393<span>views</span></div></div>
-    <div class="post-item"><div class="post-num">05</div><div class="post-text" data-ko>캐나다 로키 — 밴쿠버 출발 3박4일 밴프·레이크루이스 꿀팁</div><div class="post-text" data-en style="display:none">Canadian Rockies — 4-Day Banff & Lake Louise from Vancouver</div><div class="post-views">286<span>views</span></div></div>
+    <div class="post-item"><div class="post-num">01</div><div class="post-text" data-ko>말레이시아 KL 트로피카나 더 레지던스 — 한달살기, 인피니티풀+트윈타워 뷰</div><div class="post-text" data-en style="display:none">Tropicana The Residence KL — Long-Stay, Infinity Pool + Twin Tower View</div><div class="post-text" data-vi style="display:none">Tropicana The Residence KL — Ở dài hạn, Hồ bơi vô cực + View Tháp Đôi</div><div class="post-views"><span class="count-up" data-target="530">0</span><span>views</span></div></div>
+    <div class="post-item"><div class="post-num">02</div><div class="post-text" data-ko>일본 여행 필수품 체크리스트</div><div class="post-text" data-en style="display:none">Japan Travel Essential Checklist</div><div class="post-text" data-vi style="display:none">Danh Sách Vật Dụng Cần Mang Khi Du Lịch Nhật Bản</div><div class="post-views"><span class="count-up" data-target="416">0</span><span>views</span></div></div>
+    <div class="post-item"><div class="post-num">03</div><div class="post-text" data-ko>전주 목화 호텔 — 경성 감성 숙소 내돈내산 후기</div><div class="post-text" data-en style="display:none">Mokwa Hotel Jeonju — Honest Stay Review</div><div class="post-text" data-vi style="display:none">Khách sạn Mokwa Jeonju — Đánh giá thực tế</div><div class="post-views"><span class="count-up" data-target="393">0</span><span>views</span></div></div>
+    <div class="post-item"><div class="post-num">04</div><div class="post-text" data-ko>오사카 USJ — 닌텐도 월드 익스프레스 꿀팁 총정리</div><div class="post-text" data-en style="display:none">USJ Osaka — Nintendo World Express Pass Guide</div><div class="post-text" data-vi style="display:none">USJ Osaka — Hướng dẫn vé Express Nintendo World</div><div class="post-views"><span class="count-up" data-target="393">0</span><span>views</span></div></div>
+    <div class="post-item"><div class="post-num">05</div><div class="post-text" data-ko>캐나다 로키 — 밴쿠버 출발 3박4일 밴프·레이크루이스 꿀팁</div><div class="post-text" data-en style="display:none">Canadian Rockies — 4-Day Banff & Lake Louise from Vancouver</div><div class="post-text" data-vi style="display:none">Dãy Rocky Canada — Tour 4 ngày Banff & Lake Louise từ Vancouver</div><div class="post-views"><span class="count-up" data-target="286">0</span><span>views</span></div></div>
   </div>
 </section>
 
 <!-- CONTENT TYPES -->
 <section style="padding-top:0">
-  <div class="section-label" data-ko>협찬 콘텐츠</div><div class="section-label" data-en style="display:none">Content Offerings</div>
+  <div class="section-label" data-ko>협찬 콘텐츠</div><div class="section-label" data-en style="display:none">Content Offerings</div><div class="section-label" data-vi style="display:none">Hình Thức Hợp Tác</div>
   <h2 class="section-title" data-ko>협찬 가능한 콘텐츠 유형</h2>
   <h2 class="section-title" data-en style="display:none">Available Collaboration Types</h2>
+  <h2 class="section-title" data-vi style="display:none">Các Hình Thức Hợp Tác Có Thể</h2>
   <div class="content-grid">
-    <div class="content-card"><div class="content-icon">🏨</div><h3 data-ko>숙소 체험 리뷰</h3><h3 data-en style="display:none">Accommodation Review</h3><p data-ko>호텔·리조트·펜션·아파트먼트 직접 체험 후 상세 리뷰</p><p data-en style="display:none">Detailed review after direct stay at hotels, resorts & serviced apartments</p><div style="margin-top:10px"><span class="content-tag" data-ko>국내</span><span class="content-tag" data-en style="display:none">Domestic</span><span class="content-tag" data-ko>해외</span><span class="content-tag" data-en style="display:none">International</span><span class="content-tag">SEO</span></div></div>
-    <div class="content-card"><div class="content-icon">✈️</div><h3 data-ko>여행 프로그램 소개</h3><h3 data-en style="display:none">Travel Program Feature</h3><p data-ko>투어 패키지·액티비티·여행 상품 소개 및 예약 꿀팁</p><p data-en style="display:none">Tour packages, activities & booking tips</p><div style="margin-top:10px"><span class="content-tag" data-ko>체험단</span><span class="content-tag" data-en style="display:none">Experience</span><span class="content-tag" data-ko>협찬</span><span class="content-tag" data-en style="display:none">Sponsored</span></div></div>
-    <div class="content-card"><div class="content-icon">🔍</div><h3 data-ko>네이버 SEO 최적화</h3><h3 data-en style="display:none">Naver SEO</h3><p data-ko>대한민국 네이버 SEO 최적화로 장기적 노출 효과</p><p data-en style="display:none">Naver SEO-optimized for sustained long-term visibility in Korea</p><div style="margin-top:10px"><span class="content-tag">Naver SEO</span><span class="content-tag" data-ko>장기 노출</span><span class="content-tag" data-en style="display:none">Long-term</span></div></div>
-    <div class="content-card"><div class="content-icon">🌐</div><h3 data-ko>영문 구글 블로그</h3><h3 data-en style="display:none">English Google Blog</h3><p data-ko>nohstayguide.com을 통한 글로벌 독자 대상 영문 콘텐츠</p><p data-en style="display:none">English content reaching global audiences via nohstayguide.com</p><div style="margin-top:10px"><span class="content-tag">Google SEO</span><span class="content-tag" data-ko>글로벌</span><span class="content-tag" data-en style="display:none">Global</span></div></div>
+    <div class="content-card"><div class="content-icon">🏨</div><h3 data-ko>숙소 체험 리뷰</h3><h3 data-en style="display:none">Accommodation Review</h3><h3 data-vi style="display:none">Đánh Giá Chỗ Ở</h3><p data-ko>호텔·리조트·펜션·아파트먼트 직접 체험 후 상세 리뷰</p><p data-en style="display:none">Detailed review after direct stay at hotels, resorts & serviced apartments</p><p data-vi style="display:none">Đánh giá chi tiết sau khi trực tiếp trải nghiệm khách sạn, resort & căn hộ</p><div style="margin-top:10px"><span class="content-tag" data-ko>국내</span><span class="content-tag" data-en style="display:none">Domestic</span><span class="content-tag" data-vi style="display:none">Nội địa</span><span class="content-tag" data-ko>해외</span><span class="content-tag" data-en style="display:none">International</span><span class="content-tag" data-vi style="display:none">Quốc tế</span><span class="content-tag">SEO</span></div></div>
+    <div class="content-card"><div class="content-icon">✈️</div><h3 data-ko>여행 프로그램 소개</h3><h3 data-en style="display:none">Travel Program Feature</h3><h3 data-vi style="display:none">Giới Thiệu Chương Trình Du Lịch</h3><p data-ko>투어 패키지·액티비티·여행 상품 소개 및 예약 꿀팁</p><p data-en style="display:none">Tour packages, activities & booking tips</p><p data-vi style="display:none">Giới thiệu tour, hoạt động & mẹo đặt chỗ</p><div style="margin-top:10px"><span class="content-tag" data-ko>체험단</span><span class="content-tag" data-en style="display:none">Experience</span><span class="content-tag" data-vi style="display:none">Trải nghiệm</span><span class="content-tag" data-ko>협찬</span><span class="content-tag" data-en style="display:none">Sponsored</span><span class="content-tag" data-vi style="display:none">Tài trợ</span></div></div>
+    <div class="content-card"><div class="content-icon">🔍</div><h3 data-ko>네이버 SEO 최적화</h3><h3 data-en style="display:none">Naver SEO</h3><h3 data-vi style="display:none">Tối Ưu SEO Naver</h3><p data-ko>대한민국 네이버 SEO 최적화로 장기적 노출 효과</p><p data-en style="display:none">Naver SEO-optimized for sustained long-term visibility in Korea</p><p data-vi style="display:none">Tối ưu SEO Naver Hàn Quốc để hiển thị lâu dài</p><div style="margin-top:10px"><span class="content-tag">Naver SEO</span><span class="content-tag" data-ko>장기 노출</span><span class="content-tag" data-en style="display:none">Long-term</span><span class="content-tag" data-vi style="display:none">Dài hạn</span></div></div>
+    <div class="content-card"><div class="content-icon">🌐</div><h3 data-ko>영문 구글 블로그</h3><h3 data-en style="display:none">English Google Blog</h3><h3 data-vi style="display:none">Blog Google Tiếng Anh</h3><p data-ko>nohstayguide.com을 통한 글로벌 독자 대상 영문 콘텐츠</p><p data-en style="display:none">English content reaching global audiences via nohstayguide.com</p><p data-vi style="display:none">Nội dung tiếng Anh tiếp cận độc giả toàn cầu qua nohstayguide.com</p><div style="margin-top:10px"><span class="content-tag">Google SEO</span><span class="content-tag" data-ko>글로벌</span><span class="content-tag" data-en style="display:none">Global</span><span class="content-tag" data-vi style="display:none">Toàn cầu</span></div></div>
   </div>
 </section>
 
 <!-- BP -->
 <section style="padding-top:0">
-  <div class="section-label" data-ko>차별점</div><div class="section-label" data-en style="display:none">Brand Point</div>
+  <div class="section-label" data-ko>차별점</div><div class="section-label" data-en style="display:none">Brand Point</div><div class="section-label" data-vi style="display:none">Điểm Nổi Bật</div>
   <h2 class="section-title" data-ko>노트립만의 강점</h2>
   <h2 class="section-title" data-en style="display:none">Why Partner with NOTRIP?</h2>
+  <h2 class="section-title" data-vi style="display:none">Tại Sao Chọn NOTRIP?</h2>
   <div class="bp-list">
-    <div class="bp-card"><div class="bp-icon">📈</div><div><h3 data-ko>폭발적 성장세</h3><h3 data-en style="display:none">Explosive Growth</h3><p data-ko>본격 운영 2개월 만에 방문자 약 9배 증가. 지금이 가장 합리적인 협찬 시점입니다.</p><p data-en style="display:none">~9x visitor growth in 2 months since full launch. Now is the optimal time to partner.</p></div></div>
-    <div class="bp-card"><div class="bp-icon">🌏</div><div><h3 data-ko>한·영 이중 채널 운영</h3><h3 data-en style="display:none">Dual Channel — KR & EN</h3><p data-ko>네이버(국내) + 구글(글로벌) 동시 운영으로 국내외 독자를 모두 커버합니다.</p><p data-en style="display:none">Naver (Korea) + Google (Global) — covering both domestic and international audiences.</p></div></div>
-    <div class="bp-card"><div class="bp-icon">🎯</div><div><h3 data-ko>구매력 높은 여행 핵심층</h3><h3 data-en style="display:none">High-Intent Travel Audience</h3><p data-ko>여성 70%, 20~50대 폭넓은 연령대 — 숙소 예약에 직접 영향을 주는 실질적 여행 소비층.</p><p data-en style="display:none">70% female, 20s–50s — active travel consumers who directly influence booking decisions.</p></div></div>
+    <div class="bp-card"><div class="bp-icon">📈</div><div><h3 data-ko>폭발적 성장세</h3><h3 data-en style="display:none">Explosive Growth</h3><h3 data-vi style="display:none">Tăng Trưởng Vượt Bậc</h3><p data-ko>본격 운영 2개월 만에 방문자 약 9배 증가.<br>여러분의 비즈니스를 한국 시장에서 더 키워보세요.</p><p data-en style="display:none">~9x visitor growth in just 2 months since full launch.<br>Let's grow your business together in the Korean market.</p><p data-vi style="display:none">Lượt truy cập tăng ~9 lần chỉ trong 2 tháng hoạt động.<br>Hãy cùng phát triển doanh nghiệp của bạn tại thị trường Hàn Quốc.</p></div></div>
+    <div class="bp-card"><div class="bp-icon">🌏</div><div><h3 data-ko>한·영 이중 채널 운영</h3><h3 data-en style="display:none">Dual Channel — KR & EN</h3><h3 data-vi style="display:none">Kênh Song Ngữ KR & EN</h3><p data-ko>네이버(한국) + 구글(글로벌) 동시 운영으로<br>한국과 글로벌 독자를 모두 커버합니다.</p><p data-en style="display:none">Operating Naver (Korea) + Google (Global) simultaneously,<br>covering both Korean and global audiences at once.</p><p data-vi style="display:none">Vận hành đồng thời Naver (Hàn Quốc) + Google (Toàn cầu),<br>tiếp cận cả độc giả Hàn Quốc lẫn toàn thế giới.</p></div></div>
+    <div class="bp-card"><div class="bp-icon">🎯</div><div><h3 data-ko>구매력 높은 여행 핵심층</h3><h3 data-en style="display:none">High-Intent Travel Audience</h3><h3 data-vi style="display:none">Độc Giả Du Lịch Có Khả Năng Chi Tiêu Cao</h3><p data-ko>실제 예약에 가장 많은 영향을 미치는 여행 소비층이<br>매일 100명 이상 방문하는 블로그입니다.</p><p data-en style="display:none">A blog visited by 100+ travelers every day —<br>the exact audience that drives real accommodation bookings.</p><p data-vi style="display:none">Blog được hơn 100 du khách ghé thăm mỗi ngày —<br>đúng đối tượng có ảnh hưởng lớn nhất đến quyết định đặt phòng thực tế.</p></div></div>
   </div>
 </section>
 
@@ -378,6 +412,7 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
     <h2>Contact Point</h2>
     <p class="contact-sub" data-ko>숙소 체험, 여행 프로그램 협찬 등 다양한 제안을 환영합니다</p>
     <p class="contact-sub" data-en style="display:none">We welcome proposals for accommodation stays, travel programs, and more</p>
+    <p class="contact-sub" data-vi style="display:none">Chúng tôi chào đón mọi đề xuất hợp tác về lưu trú, chương trình du lịch và hơn thế nữa</p>
     <div class="contact-methods">
       <a class="contact-pill" href="mailto:andeasyyy@naver.com">✉️ andeasyyy@naver.com</a>
       <a class="contact-pill" href="https://blog.naver.com/notrip_wave" target="_blank">📝 Naver Blog</a>
@@ -386,15 +421,50 @@ footer{background:var(--yellow);text-align:center;padding:28px;font-size:12px;co
   </div>
 </div>
 
-<footer>© 2026 NOTRIP · <span data-ko>노트립</span><span data-en style="display:none">All rights reserved</span></footer>
+<footer>© 2026 NOTRIP · <span data-ko>노트립</span><span data-en style="display:none">All rights reserved</span><span data-vi style="display:none">Bảo lưu mọi quyền</span></footer>
 
 <script>
 function setLang(lang){
   document.querySelectorAll('[data-ko]').forEach(el=>el.style.display=lang==='ko'?'':'none');
   document.querySelectorAll('[data-en]').forEach(el=>el.style.display=lang==='en'?'':'none');
-  document.querySelectorAll('.lang-btn').forEach(btn=>btn.classList.toggle('active',btn.textContent.trim()===(lang==='ko'?'한국어':'English')));
+  document.querySelectorAll('[data-vi]').forEach(el=>el.style.display=lang==='vi'?'':'none');
+  document.querySelectorAll('.lang-btn').forEach((btn,i)=>{
+    btn.classList.toggle('active',[0,1,2][i]===['ko','en','vi'].indexOf(lang));
+  });
 }
 setLang('ko');
+
+// 카운트업 애니메이션
+function animateCount(el){
+  const target = parseInt(el.dataset.target);
+  const duration = 1200;
+  const start = performance.now();
+  function update(now){
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // easeOutExpo
+    const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    el.textContent = Math.floor(ease * target);
+    if(progress < 1) requestAnimationFrame(update);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(update);
+}
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.querySelectorAll('.count-up').forEach(el=>{
+        if(!el.dataset.animated){
+          el.dataset.animated = '1';
+          animateCount(el);
+        }
+      });
+    }
+  });
+},{threshold: 0.3});
+
+document.querySelectorAll('.posts-list').forEach(el=>observer.observe(el));
 </script>
 </body>
 </html>
