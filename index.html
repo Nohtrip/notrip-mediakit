@@ -673,11 +673,19 @@
     .case-grid{grid-template-columns:1fr;}
   }
   .case-card{
+    display:block;
     background:var(--paper);
     border:1px solid var(--line);
     border-radius:16px;
     padding:22px 24px;
     box-shadow:0 16px 32px -24px rgba(22,35,58,0.22);
+    text-decoration:none;
+    color:inherit;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .case-card:hover, .case-card:focus-visible{
+    border-color:var(--line-strong);
+    box-shadow:0 20px 36px -22px rgba(22,35,58,0.32);
   }
   .case-top{
     display:flex;
@@ -824,6 +832,8 @@
   @media (prefers-reduced-motion:no-preference){
     .gate{transition:background .15s ease, transform .15s ease;}
     .gate:hover{transform:translateX(2px);}
+    .case-card{transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;}
+    .case-card:hover{transform:translateY(-2px);}
   }
 </style>
 </head>
@@ -1162,7 +1172,7 @@
       </p>
     </div>
     <div class="case-grid">
-      <div class="case-card">
+      <a class="case-card" href="https://blog.naver.com/notrip_wave/224328492767" target="_blank" rel="noopener">
         <div class="case-top">
           <span class="case-badge">Naver Blog</span>
           <span class="case-chip"><span class="ko">협찬 표기 포함</span><span class="en">Disclosed as sponsored</span></span>
@@ -1172,15 +1182,15 @@
           <span class="en">Nha Trang, Vietnam — L'Alya Ninh Van Bay: a luxury pool villa review for couples &amp; honeymooners</span>
         </p>
         <span class="case-meta"><span class="ko">2026.06.27 발행</span><span class="en">Published Jun 27, 2026</span></span>
-      </div>
-      <div class="case-card">
+      </a>
+      <a class="case-card" href="https://nohstayguide.com/vietnam-honeymoon-lalya-ninh-van-bay/" target="_blank" rel="noopener">
         <div class="case-top">
           <span class="case-badge">Global Blog</span>
         </div>
         <p class="case-title">L'Alya Ninh Van Bay: The Ultimate Luxury Pool Villa for Your Vietnam Honeymoon</p>
         <span class="case-meta"><span class="ko">허니문 여행지 추천 콘텐츠로 소개</span><span class="en">Featured as a top pick for a Vietnam honeymoon getaway</span></span>
-      </div>
-      <div class="case-card">
+      </a>
+      <a class="case-card" href="https://maps.app.goo.gl/FGR2whuQ6cFajpmg6" target="_blank" rel="noopener">
         <div class="case-top">
           <span class="case-badge"><span class="ko">구글맵 리뷰</span><span class="en">Google Maps Review</span></span>
           <span class="case-stars" aria-hidden="true">★★★★★</span>
@@ -1190,8 +1200,8 @@
           <span class="en">"If paradise exists in this world, this might be it. The pool villa was simply perfect..."</span>
         </p>
         <span class="case-meta"><span class="ko">사진 조회수 346회</span><span class="en">346 photo views</span></span>
-      </div>
-      <div class="case-card">
+      </a>
+      <a class="case-card" href="https://www.instagram.com/p/DaIV3N-Dwxv/?utm_source=ig_web_copy_link&amp;igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">
         <div class="case-top">
           <span class="case-badge">Instagram</span>
         </div>
@@ -1199,8 +1209,8 @@
           <span class="ko">"배를 타야만 들어갈 수 있는 리조트, 실제로 와보니 진짜 럭셔리 그 자체였어요!"</span>
           <span class="en">"A resort you can only reach by boat — and it was pure luxury in person!"</span>
         </p>
-        <span class="case-meta">@nohtrip · <span class="ko">좋아요 다수</span><span class="en">well-liked by followers</span></span>
-      </div>
+        <span class="case-meta">@nohtrip</span>
+      </a>
     </div>
     <p class="stub-note">
       <span class="ko">콘텐츠는 협의한 일정 이내에 발행됩니다.</span>
